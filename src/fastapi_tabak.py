@@ -1,5 +1,9 @@
 from fastapi import FastAPI
 
-app = FastAPI()
-# from typing import Optional
-# from pydantic import BaseModel
+from router import Create_Inventory_rout
+
+app = FastAPI(
+    title= 'Inventory calculator'
+)
+app.include_router(Create_Inventory_rout)
+
