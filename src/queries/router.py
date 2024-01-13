@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 from .models import Base, Inventory
 
 
-Create_Inventory_rout = APIRouter(tags = ['Create Inventory'])
+Create_Inventory_rout = APIRouter(tags = ['Create Inventory'], prefix='create')
 
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///Inventories-sqlalchemy.db"
