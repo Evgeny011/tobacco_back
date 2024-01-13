@@ -2,3 +2,4 @@ FastAPI
 SQLalchemy
 Uvicorn
 alembic
+pydantic_settings
