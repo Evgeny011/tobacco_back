@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from router import Create_Inventory_rout
+from queries.router import Create_Inventory_rout
 
 app = FastAPI(
     title= 'Inventory calculator'

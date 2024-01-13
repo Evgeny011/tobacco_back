@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
 
-from .queries.models import Base, Inventory
+from .models import Base, Inventory
 
 
 Create_Inventory_rout = APIRouter(tags = ['Create Inventory'])
