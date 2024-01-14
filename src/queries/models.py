@@ -12,5 +12,3 @@ class Inventory(Base):
     Start_Date = Column(Date)
     End_Date = Column(Date)
     Timestamp = Column(TIMESTAMP)
-
-    
