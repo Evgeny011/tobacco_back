@@ -5,15 +5,14 @@ from fastapi import APIRouter
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
-
 from src.queries.models import  Inventory  #Base
 
 
-Create_Inventory_rout = APIRouter(tags = ['Create Inventory'], prefix='create')
+Create_Inventory_rout = APIRouter(tags = ['Create Inventory'], prefix = 'create')
 
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///Inventories-sqlalchemy.db"
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+
+engine = create_engine('sqlite:///Inventories-sqlalchemy.db', echo = True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 @Create_Inventory_rout.post("/")
