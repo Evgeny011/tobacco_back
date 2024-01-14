@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from queries.router import Create_Inventory_rout
+from queries.router_create import Create_Inventory_rout
 
 
 app = FastAPI(
