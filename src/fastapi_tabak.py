@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from queries.router_create import Create_Inventory_rout
+from queries.inventory_router import inventory_router
 
 import sqlalchemy_tabak
 
@@ -8,4 +8,4 @@ import sqlalchemy_tabak
 app = FastAPI(
     title= 'Inventory calculator'
 )
-app.include_router(Create_Inventory_rout)
+app.include_router(inventory_router)
