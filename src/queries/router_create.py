@@ -3,22 +3,24 @@ from fastapi import APIRouter
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
+from pydantic import BaseModel
+from queries.models import  Inventory
+ 
+Create_Inventory_rout = APIRouter(tags=['Create Inventory'], prefix='/create')
+engine = create_engine('sqlite:///inventories-sqlalchemy.db', echo=True)
+SessionLocal = sessionmaker(autocommit=True, autoflush=True, bind=engine)
 
-from src.queries.models import  Inventory  #Base
-
-
-Create_Inventory_rout = APIRouter(tags = ['Create Inventory'], prefix = 'create')
-
-
-
-engine = create_engine('sqlite:///Inventories-sqlalchemy.db', echo = True)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+class InventoryInput(BaseModel):
+    start_date: str
+    end_date: str
 
 @Create_Inventory_rout.post("/")
-async def create_inventory(start_date: str, end_date: str, timestamp: str):
+async def create_inventory(data: InventoryInput):
     db = SessionLocal()
-    inventory = Inventory(Start_Date=start_date, End_Date=end_date, Timestamp=timestamp)
+    inventory = Inventory(start_date=data.start_date, end_date=data.end_date)
     db.add(inventory)
     db.commit()
-    db.refresh(inventory)
+    db.refresh(inventory,exclude_unset=True)
     return inventory
+
+

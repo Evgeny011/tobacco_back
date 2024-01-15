@@ -1,15 +1,28 @@
 import sqlalchemy as db
 
+from sqlalchemy.ext.declarative import declarative_base
 
-engine = db.create_engine('sqlite:///Inventories-sqlalchemy.db', 
+from sqlalchemy.orm import sessionmaker
+
+from queries.models import Inventory
+
+
+
+engine = db.create_engine('sqlite:///inventories-sqlalchemy.db', 
                           echo=True)
 connection = engine.connect()
 metadata = db.MetaData()
-Inventories = db.Table('Inventories', metadata,
-db.Column("ID", db.Integer),
-db.Column("Start_Date", db.Date),
-db.Column("End_Date", db.Date),
-db.Column("Timestamp", db.TIMESTAMP)
+Inventories = db.Table('inventories', metadata,
+                db.Column("id", db.Integer, autoincrement=True),
+                db.Column("start_date", db.Date),
+                db.Column("end_date", db.Date),
+                db.Column("timestamp", db.TIMESTAMP, server_default= db.func.current_timestamp())
 )
 metadata.create_all(engine)
+SessionLocal = sessionmaker(autocommit=True, autoflush=True, bind=engine)
+
+
+
+
+
 
