@@ -8,12 +8,12 @@ from queries.models import Inventory
 
 
 
-engine = db.create_engine('sqlite:///database-sqlalchemy.db', 
+engine = db.create_engine('sqlite:///database.sqlite', 
                           echo=True)
 connection = engine.connect()
 metadata = db.MetaData()
 Inventories = db.Table('inventories', metadata,
-                db.Column("id", db.Integer, autoincrement=True),
+                db.Column("id", db.Integer, autoincrement=True, primary_key=True),
                 db.Column("start_date", db.Date),
                 db.Column("end_date", db.Date),
                 db.Column("timestamp", db.TIMESTAMP, server_default= db.func.current_timestamp())
