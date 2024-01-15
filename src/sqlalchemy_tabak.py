@@ -8,7 +8,7 @@ from queries.models import Inventory
 
 
 
-engine = db.create_engine('sqlite:///inventories-sqlalchemy.db', 
+engine = db.create_engine('sqlite:///database-sqlalchemy.db', 
                           echo=True)
 connection = engine.connect()
 metadata = db.MetaData()
