@@ -7,17 +7,23 @@ from queries.models import  Inventory
 
 from datetime import datetime
 
+from pydantic import BaseModel
+
 
 inventory_router = APIRouter(tags=['Create Inventory'], prefix='/inventory')
 engine = create_engine('sqlite:///database.sqlite', echo=True)
 sessionLocal = sessionmaker(autoflush=True, bind=engine)
 
+class InventoryInput(BaseModel):
+    start_date: str
+    end_date: str
+
 
 @inventory_router.post("/create")
-async def create_inventory(start_date:str,end_date:str):
+async def create_inventory(data: InventoryInput):
     db = sessionLocal()
-    start_date_obj = datetime.strptime(start_date, '%d.%m.%Y').date()
-    end_date_obj = datetime.strptime(end_date, '%d.%m.%Y').date()
+    start_date_obj = datetime.strptime(data.start_date, '%d.%m.%Y').date()
+    end_date_obj = datetime.strptime(data.end_date, '%d.%m.%Y').date()
     inventory = Inventory(start_date=start_date_obj, end_date=end_date_obj)
     db.add(inventory)
     db.commit()
