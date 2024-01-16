@@ -4,6 +4,8 @@ from sqlalchemy.ext.declarative import declarative_base
 
 from sqlalchemy.sql import func
 
+from sqlalchemy.orm import validates
+
 Base = declarative_base()
 
 class Inventory(Base):
@@ -12,3 +14,17 @@ class Inventory(Base):
     start_date = Column(Date)
     end_date = Column(Date)
     timestamp = Column(TIMESTAMP, server_default=func.current_timestamp())
+
+    @validates('start_date')
+    def validate_start_date(self, key, start_date):
+        if self.end_date and start_date:
+            if start_date >= self.end_date:
+                raise ValueError('Start date must be less than end date')
+        return start_date
+
+    @validates('end_date')
+    def validate_end_date(self, key, end_date):
+        if self.start_date and end_date:
+            if end_date <= self.start_date:
+                raise ValueError('End date must be greater than start date')
+        return end_date

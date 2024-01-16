@@ -1,13 +1,13 @@
 from fastapi import APIRouter
 
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, validates
 from sqlalchemy import create_engine
 
 from queries.models import  Inventory
 
 from datetime import datetime
 
-from pydantic import BaseModel,  validator #Валидатор писать в классе. Надо чтоб start_data была меньше end_data
+from pydantic import BaseModel
 
 
 
@@ -19,7 +19,6 @@ sessionLocal = sessionmaker(autoflush=True, bind=engine)
 class InventoryInput(BaseModel):
     start_date: str
     end_date: str
-
 
 @inventory_router.post("/create")
 async def create_inventory(data: InventoryInput):
@@ -33,7 +32,7 @@ async def create_inventory(data: InventoryInput):
     return inventory
 
 @inventory_router.delete("/delete/{id}")
-async def delete_inventory(id: int):
+async def delete_inventory_by_id(id: int):
     db = sessionLocal()
     inventory = db.query(Inventory).filter(Inventory.id == id).first()
     if inventory:
@@ -50,7 +49,7 @@ async def get_inventories():
     return inventory
 
 @inventory_router.get("/get/{id}")
-async def get_inventories_id(id: int):
+async def get_inventory_by_id(id: int):
     db = sessionLocal()
     inventory = db.query(Inventory).filter(Inventory.id == id).first()
     return inventory
