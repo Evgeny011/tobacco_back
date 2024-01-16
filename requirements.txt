@@ -3,3 +3,5 @@ SQLalchemy
 Uvicorn
 alembic
 pydantic_settings
+pydantic
+datetime 

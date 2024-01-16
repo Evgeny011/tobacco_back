@@ -7,7 +7,9 @@ from queries.models import  Inventory
 
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel,  validator #Валидатор писать в классе. Надо чтоб start_data была меньше end_data
+
+
 
 
 inventory_router = APIRouter(tags=['Create Inventory'], prefix='/inventory')
@@ -30,4 +32,19 @@ async def create_inventory(data: InventoryInput):
     db.refresh(inventory)
     return inventory
 
+@inventory_router.delete("/delete/{id}")
+async def delete_inventory(id: int):
+    db = sessionLocal()
+    inventory = db.query(Inventory).filter(Inventory.id == id).first()
+    if inventory:
+        db.delete(inventory)
+        db.commit()
+        return {"message": "The inventory was successfully deleted"}
+    else:
+        return {"error": "Inventory was not deleted"}
 
+@inventory_router.get("/get")
+async def get_inventories():
+    db = sessionLocal()
+    inventories = db.query(Inventory).all()
+    return inventories
