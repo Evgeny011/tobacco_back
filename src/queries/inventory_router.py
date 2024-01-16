@@ -46,5 +46,12 @@ async def delete_inventory(id: int):
 @inventory_router.get("/get")
 async def get_inventories():
     db = sessionLocal()
-    inventories = db.query(Inventory).all()
-    return inventories
+    inventory = db.query(Inventory).all()
+    return inventory
+
+@inventory_router.get("/get/{id}")
+async def get_inventories_id(id: int):
+    db = sessionLocal()
+    inventory = db.query(Inventory).filter(Inventory.id == id).first()
+    return inventory
+
