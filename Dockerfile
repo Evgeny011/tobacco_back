@@ -4,6 +4,8 @@ WORKDIR /tobacco_back
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV PYTHONPATH=/tobacco_back
+
 
 COPY requirements.txt .
 
