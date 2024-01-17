@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir --upgrade -r /tobacco_back/requirements.txt
 
 COPY . /tobacco_back
 
-CMD ["uvicorn", "fastapi_tabak:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["cd", "src/", "&&", "uvicorn", "fastapi_tabak:app", "--host", "0.0.0.0", "--port", "8000"]
