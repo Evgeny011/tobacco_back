@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 
-from queries.inventory_router import inventory_router
+from src.queries.inventory_router import inventory_router
 
-import sqlalchemy_tabak
+import src.sqlalchemy_tabak
 
 
 app = FastAPI(

@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from sqlalchemy.orm import sessionmaker, validates
 from sqlalchemy import create_engine
 
-from queries.models import  Inventory
+from src.queries.models import  Inventory
 
 from datetime import datetime
 
