@@ -1,13 +1,9 @@
-FROM python:3
-
 WORKDIR /tobacco_back
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV PYTHONPATH=/tobacco_back
 
-
-COPY ./requirements.txt /tobacco_back/requirements.txt
+COPY requirements.txt .
 
 RUN pip install --no-cache-dir --upgrade -r /tobacco_back/requirements.txt
 
