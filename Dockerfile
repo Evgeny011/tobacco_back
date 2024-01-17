@@ -11,7 +11,7 @@ COPY ./requirements.txt /tobacco_back/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /tobacco_back/requirements.txt
 
-COPY ./src /tobacco_back/src
+COPY . .
 
 
 CMD ["uvicorn", "src.fastapi_tabak:app", "--host", "0.0.0.0", "--port", "8000"]
