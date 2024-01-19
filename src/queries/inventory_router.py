@@ -53,4 +53,3 @@ async def get_inventory_by_id(id: int):
     db = sessionLocal()
     inventory = db.query(Inventory).filter(Inventory.id == id).first()
     return inventory
-
