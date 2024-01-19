@@ -5,9 +5,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
-
-
-
 engine = db.create_engine('sqlite:///database.sqlite', 
                           echo=True)
 connection = engine.connect()
@@ -20,11 +17,3 @@ Inventories = db.Table('inventories', metadata,
 )
 metadata.create_all(engine)
 SessionLocal = sessionmaker(autocommit=True, autoflush=True, bind=engine)
-
-
-
-
-
-
-
-

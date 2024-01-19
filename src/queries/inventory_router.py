@@ -10,8 +10,6 @@ from datetime import datetime
 from pydantic import BaseModel
 
 
-
-
 inventory_router = APIRouter(tags=['Create Inventory'], prefix='/inventory')
 engine = create_engine('sqlite:///database.sqlite', echo=True)
 sessionLocal = sessionmaker(autoflush=True, bind=engine)

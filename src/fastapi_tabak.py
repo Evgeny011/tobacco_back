@@ -17,4 +17,3 @@ app.include_router(inventory_router)
 app.add_middleware(
     CORSMiddleware, allow_origins=ALLOW_ORIGINS, allow_credentials=True
 )
-
