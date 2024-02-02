@@ -12,8 +12,23 @@ ALLOW_ORIGINS = ["*"]
 app = FastAPI(
     title= 'Inventory calculator'
 )
+
+
+
+origins = [
+    "http://localhost",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "http://82.97.248.162:8000"  
+]
+
+
 app.include_router(inventory_router)
 
 app.add_middleware(
-    CORSMiddleware, allow_origins=ALLOW_ORIGINS, allow_credentials=True
+    CORSMiddleware, 
+    allow_origins=ALLOW_ORIGINS, 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
