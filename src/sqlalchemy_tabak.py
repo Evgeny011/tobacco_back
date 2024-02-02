@@ -7,6 +7,7 @@ from sqlalchemy.orm import sessionmaker
 
 engine = db.create_engine('sqlite:///database.sqlite', 
                           echo=True)
+
 connection = engine.connect()
 metadata = db.MetaData()
 Inventories = db.Table('inventories', metadata,
@@ -15,5 +16,6 @@ Inventories = db.Table('inventories', metadata,
                 db.Column("end_date", db.Date),
                 db.Column("timestamp", db.TIMESTAMP, server_default= db.func.current_timestamp())
 )
+
 metadata.create_all(engine)
 SessionLocal = sessionmaker(autocommit=True, autoflush=True, bind=engine)

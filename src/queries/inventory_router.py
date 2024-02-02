@@ -1,13 +1,15 @@
 from fastapi import APIRouter
 
 from sqlalchemy.orm import sessionmaker, validates
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, desc
 
 from src.queries.models import  Inventory
 
 from datetime import datetime
 
 from pydantic import BaseModel
+
+from datetime import timedelta
 
 
 inventory_router = APIRouter(tags=['Create Inventory'], prefix='/inventory')
@@ -43,7 +45,7 @@ async def delete_inventory_by_id(id: int):
 @inventory_router.get("/get")
 async def get_inventories():
     db = sessionLocal()
-    inventory = db.query(Inventory).all()
+    inventory = db.query(Inventory).order_by(desc(Inventory.id)).all()
     return inventory
 
 @inventory_router.get("/get/{id}")
@@ -51,3 +53,10 @@ async def get_inventory_by_id(id: int):
     db = sessionLocal()
     inventory = db.query(Inventory).filter(Inventory.id == id).first()
     return inventory
+
+@inventory_router.get("/get_last_date")
+async def get_last_date():
+    db = sessionLocal()
+    inventory = db.query(Inventory).order_by(desc(Inventory.id)).first() 
+    last_date = inventory.end_date + timedelta(days=1)
+    return last_date
