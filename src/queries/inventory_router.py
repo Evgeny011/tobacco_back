@@ -12,7 +12,7 @@ from pydantic import BaseModel
 from datetime import timedelta
 
 
-inventory_router = APIRouter(tags=['Create Inventory'], prefix='/inventory')
+inventory_router = APIRouter(tags=['Inventory'], prefix='/inventory')
 engine = create_engine('sqlite:///database.sqlite', echo=True)
 sessionLocal = sessionmaker(autoflush=True, bind=engine)
 
@@ -59,4 +59,5 @@ async def get_last_date():
     db = sessionLocal()
     inventory = db.query(Inventory).order_by(desc(Inventory.id)).first() 
     last_date = inventory.end_date + timedelta(days=1)
-    return last_date
+    format_date = last_date.strftime("%d.%m.%Y")
+    return format_date
