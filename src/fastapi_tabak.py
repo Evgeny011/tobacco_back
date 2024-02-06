@@ -4,6 +4,8 @@ from src.queries.inventory_router import inventory_router
 
 from src.queries.weighing_router import weighing_router
 
+from src.queries.container_rout import container_router
+
 import src.sqlalchemy_tabak
 
 from fastapi.middleware.cors import CORSMiddleware
@@ -23,6 +25,8 @@ origins = [
 ]
 
 app.include_router(inventory_router)
+app.include_router(weighing_router)
+app.include_router(container_router)
 
 app.add_middleware(
     CORSMiddleware, 

@@ -11,14 +11,12 @@ from pydantic import BaseModel
 
 from datetime import timedelta
 
+from src.queries.models import InventoryInput
+
 
 inventory_router = APIRouter(tags=['Inventory'], prefix='/inventory')
 engine = create_engine('sqlite:///database.sqlite', echo=True)
 sessionLocal = sessionmaker(autoflush=True, bind=engine)
-
-class InventoryInput(BaseModel):
-    start_date: str
-    end_date: str
 
 @inventory_router.post("/create")
 async def create_inventory(data: InventoryInput):
