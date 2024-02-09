@@ -4,7 +4,7 @@ from src.queries.inventory_router import inventory_router
 
 from src.queries.weighing_router import weighing_router
 
-from src.queries.container_rout import container_router
+from src.queries.container_router import container_router
 
 import src.sqlalchemy_tabak
 

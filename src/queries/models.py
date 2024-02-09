@@ -6,7 +6,7 @@ from sqlalchemy.sql import func
 
 from sqlalchemy.orm import validates, relationship
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 Base = declarative_base()
@@ -17,6 +17,7 @@ class Inventory(Base):
     start_date = Column(Date)
     end_date = Column(Date)
     timestamp = Column(TIMESTAMP, server_default=func.current_timestamp())
+    
     weighings = relationship("Weighing", back_populates="inventory", cascade="all, delete-orphan")
 
     @validates('start_date')
@@ -40,8 +41,8 @@ class Weighing(Base):
     value = Column(Integer)
     inventory_id = Column(Integer,  ForeignKey('inventories.id'))
     timestamp = Column(TIMESTAMP, server_default=func.current_timestamp())
-    inventory = relationship("Inventory", back_populates="weighings")
 
+    inventory = relationship("Inventory", back_populates="weighings")
 
 
 class Container(Base):
@@ -59,8 +60,8 @@ class Container(Base):
 
 
 class  ContainerInput(BaseModel):
-    name: str
-    weight: int
+    name: str = Field(min_length = 1, max_length = 40)
+    weight: int = Field(gt=1, lt=251)
 
 
 class InventoryInput(BaseModel):
@@ -70,7 +71,7 @@ class InventoryInput(BaseModel):
 
 class WeighingInput(BaseModel):
     inventory_id: int
-    value: int
-    container_count: int
+    value: int = Field(gt = 1, lt = 35001)
+    container_count: int = Field(gt = 1, lt = 350)
     container_id: int
 
