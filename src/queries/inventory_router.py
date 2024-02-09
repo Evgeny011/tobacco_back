@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
 from sqlalchemy.orm import sessionmaker, validates
 from sqlalchemy import create_engine, desc
@@ -55,7 +55,9 @@ async def get_inventory_by_id(id: int):
 @inventory_router.get("/get_last_date")
 async def get_last_date():
     db = sessionLocal()
-    inventory = db.query(Inventory).order_by(desc(Inventory.id)).first() 
+    inventory = db.query(Inventory).order_by(desc(Inventory.id)).first()
+    if not inventory:
+        raise HTTPException(status_code = 404, detail = "No inventory found")
     last_date = inventory.end_date + timedelta(days=1)
     format_date = last_date.strftime("%d.%m.%Y")
     return format_date
