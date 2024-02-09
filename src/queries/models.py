@@ -42,11 +42,6 @@ class Weighing(Base):
     timestamp = Column(TIMESTAMP, server_default=func.current_timestamp())
     inventory = relationship("Inventory", back_populates="weighings")
 
-    @validates('value')
-    def validate_value(self, key, value):
-        if value <= 0:
-            raise ValueError("Weight value must be greater than 0")
-        return value
 
 
 class Container(Base):
@@ -56,14 +51,22 @@ class Container(Base):
     weight = Column(Integer)
     timestamp = Column(TIMESTAMP, server_default=func.current_timestamp())
 
+    @validates('weight')
+    def validate_value(self, key, weight):
+        if weight <= 0:
+            raise ValueError("Weight container must be greater than 0")
+        return weight
+
 
 class  ContainerInput(BaseModel):
     name: str
     weight: int
 
+
 class InventoryInput(BaseModel):
     start_date: str
     end_date: str
+
 
 class WeighingInput(BaseModel):
     inventory_id: int

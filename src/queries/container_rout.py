@@ -34,3 +34,9 @@ async def delete_container(id: int):
         return {"message": "Container deleted successfully"}
     else:
         return {"error": "There was an error deleting the container"}
+    
+@container_router.get("/get/{id}")
+async def get_container_by_id(id: int):
+    db = sessionLocal()
+    container = db.query(Container).filter(Container.id == id).first()
+    return container
