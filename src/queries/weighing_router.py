@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, desc
 
 from sqlalchemy.orm import sessionmaker
 
@@ -37,11 +37,11 @@ async def delete_weight_by_id(id: int):
         return {"message": "The weighing was successfully deleted"}
     else:
         return {"error": "Weighing was not deleted"}
-    
+
 @weighing_router.get("/get/{inventory_id}")
 async def get_weighings_by_inventory_id(inventory_id: int):
     db = sessionLocal()
-    weighings = db.query(Weighing).filter(inventory_id == inventory_id).all()
+    weighings = db.query(Weighing).filter(inventory_id == inventory_id).order_by(desc(Weighing.id)).all()
     if not weighings:
-        raise HTTPException(status_code = 404, detail = "No weighings found for this inventory")
+        raise HTTPException(status_code=404, detail="No weighings found for this inventory")
     return [{"id": w.id, "value": w.value} for w in weighings]

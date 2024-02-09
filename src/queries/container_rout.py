@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, desc
 
 from sqlalchemy.orm import sessionmaker
 
@@ -34,9 +34,9 @@ async def delete_container(id: int):
         return {"message": "Container deleted successfully"}
     else:
         return {"error": "There was an error deleting the container"}
-    
-@container_router.get("/get/{id}")
-async def get_container_by_id(id: int):
+
+@container_router.get("/get")
+async def get_conrainers():
     db = sessionLocal()
-    container = db.query(Container).filter(Container.id == id).first()
+    container = db.query(Container).order_by(desc(Container.id)).all()
     return container
