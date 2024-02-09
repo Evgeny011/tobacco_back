@@ -24,7 +24,7 @@ async def create_container(container_input: ContainerInput):
     db.refresh(new_container)
     return new_container
 
-@container_router.delete("/delete")
+@container_router.delete("/delete/{id}")
 async def delete_container(id: int):
     db = sessionLocal()
     delete_container = db.query(Container).filter(Container.id == id).first()
