@@ -46,3 +46,4 @@ async def get_weighings_by_inventory_id(inventory_id: int):
         raise HTTPException(status_code=404, detail="No weighings found for this inventory")
     return [{"id": w.id, "value": w.value} for w in weighings]
 
+
