@@ -72,6 +72,6 @@ class InventoryInput(BaseModel):
 class WeighingInput(BaseModel):
     inventory_id: int
     value: int = Field(gt = 1, lt = 35001)
-    container_count: int = Field(gt = 1, lt = 350)
+    container_count: int = Field(gt = 0, lt = 350)
     container_id: int
 

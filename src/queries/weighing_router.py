@@ -45,3 +45,13 @@ async def get_weighings_by_inventory_id(inventory_id: int):
     if not weighings:
         raise HTTPException(status_code=404, detail="No weighings found for this inventory")
     return [{"id": w.id, "value": w.value} for w in weighings]
+
+
+@weighing_router.get("/total_weight/{inventory_id}")
+async def get_total_weight(inventory_id: int):
+    db = sessionLocal()
+    inventory = db.query(Inventory).filter(Inventory.id == inventory_id).first()
+    if not inventory:
+        return {"error": "Inventory not found"}
+    total_weight = sum(weighing.value for weighing in inventory.weighings)
+    return {total_weight}
