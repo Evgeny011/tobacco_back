@@ -52,6 +52,6 @@ async def get_total_weight(inventory_id: int):
     db = sessionLocal()
     inventory = db.query(Inventory).filter(Inventory.id == inventory_id).first()
     if not inventory:
-        return {"error": "Inventory not found"}
+        raise HTTPException(status_code=404, detail="Inventory not found")
     total_weight = sum(weighing.value for weighing in inventory.weighings)
     return {total_weight}
