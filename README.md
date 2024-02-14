@@ -34,9 +34,11 @@ Start uvicorn
 
 ### Docker   
    
-`docker build -t fastapi .`
+```
+docker build -t fastapi .
 
-`docker run -d --name mycontainer -p 8000:8000 fastapi`
+docker run -d --name mycontainer -p 8000:8000 fastapi
+```
 
 
 
