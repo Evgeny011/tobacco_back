@@ -4,9 +4,13 @@ from sqlalchemy import create_engine, desc
 
 from sqlalchemy.orm import sessionmaker
 
-from src.queries.models import Weighing, Inventory, Container
+from src.weighing.models import Weighing
 
-from src.queries.models import WeighingInput
+from src.inventory.models import Inventory
+
+from src.container.models import Container
+
+from src.weighing.models import WeighingInput
 
 
 weighing_router = APIRouter(tags=['Weighing'], prefix='/weighing')

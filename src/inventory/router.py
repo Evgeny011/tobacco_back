@@ -3,15 +3,11 @@ from fastapi import APIRouter, HTTPException
 from sqlalchemy.orm import sessionmaker, validates
 from sqlalchemy import create_engine, desc
 
-from src.queries.models import  Inventory
+from datetime import datetime, timedelta
 
-from datetime import datetime
+from src.weighing.models import Weighing
 
-from pydantic import BaseModel
-
-from datetime import timedelta
-
-from src.queries.models import InventoryInput
+from src.inventory.models import Inventory, InventoryInput
 
 
 inventory_router = APIRouter(tags=['Inventory'], prefix='/inventory')

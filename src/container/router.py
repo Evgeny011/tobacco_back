@@ -4,11 +4,9 @@ from sqlalchemy import create_engine, desc
 
 from sqlalchemy.orm import sessionmaker
 
-from src.queries.models import Container
+from src.container.models import Container
 
-from pydantic import BaseModel
-
-from src.queries.models import ContainerInput
+from src.container.models import ContainerInput
 
 
 container_router = APIRouter(tags=['Container'], prefix='/container')
