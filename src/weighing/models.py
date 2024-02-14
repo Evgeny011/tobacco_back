@@ -4,8 +4,6 @@ from src.base import Base
 
 from sqlalchemy.sql import func
 
-from sqlalchemy.orm import  relationship
-
 from pydantic import BaseModel, Field
 
 

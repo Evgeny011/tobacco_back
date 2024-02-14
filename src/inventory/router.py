@@ -1,11 +1,9 @@
 from fastapi import APIRouter, HTTPException
 
-from sqlalchemy.orm import sessionmaker, validates
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, desc
 
 from datetime import datetime, timedelta
-
-from src.weighing.models import Weighing
 
 from src.inventory.models import Inventory, InventoryInput
 
