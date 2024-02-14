@@ -8,7 +8,7 @@
 - FastApi
 - SQLite
 - Pydantic
-- DOcker
+- Docker
 - Uvicorn
 - Python
 
@@ -33,13 +33,11 @@ Start uvicorn
 `uvicorn app:app --reload`
 
 ### Docker   
+   
+`docker build -t fastapi .`
 
-`
-docker build -t fastapi .
+`docker run -d --name mycontainer -p 8000:8000 fastapi`
 
-docker run -d --name mycontainer -p 8000:8000 fastapi
-
-`
 
 
 
