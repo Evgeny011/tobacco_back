@@ -36,5 +36,5 @@ containers = db.Table('containers', metadata,
 )
 
 metadata.create_all(engine)
-SessionLocal = sessionmaker(autocommit=True, autoflush=True, bind=engine) #Вероятно из-за этого чистит все нахуй
+SessionLocal = sessionmaker(autocommit=True, autoflush=True, bind=engine) 
 
