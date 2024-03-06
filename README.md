@@ -30,7 +30,7 @@ Install dependencies into virtual environment
 `pip install -r requirements.txt`  
 
 Start uvicorn   
-`uvicorn app:app --reload`
+`uvicorn src.fastapi_tabak:app --reload`
 
 ### Docker   
    
